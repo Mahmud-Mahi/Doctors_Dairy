@@ -1,0 +1,24 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>undo.png</file>
+    <file>stethoscope.png</file>
+    <file>save.png</file>
+    <file>redo.png</file>
+    <file>print.png</file>
+    <file>paste.png</file>
+    <file>open.png</file>
+    <file>new.png</file>
+    <file>minimize.png</file>
+    <file>maximize.png</file>
+    <file>main.py</file>
+    <file>font-size.png</file>
+    <file>font-family.png</file>
+    <file>font-color.png</file>
+    <file>font.png</file>
+    <file>exit.png</file>
+    <file>cut.png</file>
+    <file>copy.png</file>
+    <file>close.png</file>
+    <file>background.png</file>
+  </qresource>
+</RCC>

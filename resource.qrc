@@ -1,7 +1,7 @@
 <RCC>
   <qresource prefix="newPrefix">
     <file>undo.png</file>
-    <file>stethoscope.png</file>
+    <file>report.png</file>
     <file>save.png</file>
     <file>redo.png</file>
     <file>print.png</file>
@@ -10,7 +10,6 @@
     <file>new.png</file>
     <file>minimize.png</file>
     <file>maximize.png</file>
-    <file>main.py</file>
     <file>font-size.png</file>
     <file>font-family.png</file>
     <file>font-color.png</file>

@@ -21,13 +21,14 @@ from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateEdit,
     QLayout, QLineEdit, QMainWindow, QMenu,
     QMenuBar, QRadioButton, QScrollArea, QSizePolicy,
     QSpacerItem, QStatusBar, QTextEdit, QVBoxLayout,
-    QWidget, QButtonGroup)
+    QWidget)
 import resource_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
+        MainWindow.setWindowModality(Qt.ApplicationModal)
         MainWindow.resize(1200, 800)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -38,10 +39,14 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         MainWindow.setFont(font)
         icon = QIcon()
-        icon.addFile(u":/newPrefix/stethoscope.png", QSize(), QIcon.Mode.Normal, QIcon.State.On)
+        icon.addFile(u":/newPrefix/report.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(u":/newPrefix/report.png", QSize(), QIcon.Mode.Normal, QIcon.State.On)
         MainWindow.setWindowIcon(icon)
         MainWindow.setAutoFillBackground(True)
-        MainWindow.setIconSize(QSize(30, 30))
+        MainWindow.setIconSize(QSize(50, 50))
+        MainWindow.setToolButtonStyle(Qt.ToolButtonIconOnly)
+        MainWindow.setAnimated(True)
+        MainWindow.setDocumentMode(False)
         self.actionNew = QAction(MainWindow)
         self.actionNew.setObjectName(u"actionNew")
         icon1 = QIcon()
@@ -131,19 +136,22 @@ class Ui_MainWindow(object):
         icon17 = QIcon()
         icon17.addFile(u":/newPrefix/background.png", QSize(), QIcon.Mode.Normal, QIcon.State.On)
         self.actionBackground.setIcon(icon17)
+        self.actionAbout_Us = QAction(MainWindow)
+        self.actionAbout_Us.setObjectName(u"actionAbout_Us")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
-        self.horizontalLayout_130 = QHBoxLayout(self.centralwidget)
-        self.horizontalLayout_130.setObjectName(u"horizontalLayout_130")
+        self.verticalLayout_10 = QVBoxLayout(self.centralwidget)
+        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.scrollArea = QScrollArea(self.centralwidget)
         self.scrollArea.setObjectName(u"scrollArea")
+        self.scrollArea.setMinimumSize(QSize(0, 0))
         self.scrollArea.setFont(font)
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -2319, 1172, 3288))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1172, 4088))
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
@@ -155,17 +163,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.setSpacing(25)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalLayout_6.setSizeConstraint(QLayout.SetDefaultConstraint)
-        self.header_label = QLabel(self.scrollAreaWidgetContents)
-        self.header_label.setObjectName(u"header_label")
-        font1 = QFont()
-        font1.setFamilies([u"DejaVu Serif"])
-        font1.setPointSize(18)
-        font1.setBold(True)
-        self.header_label.setFont(font1)
-        self.header_label.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_6.addWidget(self.header_label)
-
         self.verticalLayout_5 = QVBoxLayout()
         self.verticalLayout_5.setSpacing(25)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
@@ -178,6 +175,18 @@ class Ui_MainWindow(object):
         self.verticalLayout.setSpacing(10)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(10, 10, 10, 10)
+        self.header_label = QLabel(self.groupBox)
+        self.header_label.setObjectName(u"header_label")
+        self.header_label.setMinimumSize(QSize(0, 42))
+        font1 = QFont()
+        font1.setFamilies([u"DejaVu Serif"])
+        font1.setPointSize(18)
+        font1.setBold(True)
+        self.header_label.setFont(font1)
+        self.header_label.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout.addWidget(self.header_label)
+
         self.horizontalLayout_5 = QHBoxLayout()
         self.horizontalLayout_5.setSpacing(90)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
@@ -296,11 +305,6 @@ class Ui_MainWindow(object):
         self.female_radiobtn.setFont(font)
         self.female_radiobtn.setTabletTracking(True)
 
-        self.sex_btn_group = QButtonGroup(self.groupBox)
-        self.sex_btn_group.setObjectName(u"sex_btn_group")
-        self.sex_btn_group.addButton(self.male_radiobtn)
-        self.sex_btn_group.addButton(self.female_radiobtn)
-
         self.horizontalLayout_6.addWidget(self.female_radiobtn)
 
 
@@ -350,6 +354,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_10.addWidget(self.job_label)
 
         self.job_comboBox = QComboBox(self.groupBox)
+        self.job_comboBox.addItem("")
+        self.job_comboBox.addItem("")
         self.job_comboBox.addItem("")
         self.job_comboBox.addItem("")
         self.job_comboBox.addItem("")
@@ -495,13 +501,14 @@ class Ui_MainWindow(object):
         self.illness_label.setObjectName(u"illness_label")
         font2 = QFont()
         font2.setFamilies([u"DejaVu Serif"])
-        font2.setPointSize(12)
+        font2.setPointSize(13)
         self.illness_label.setFont(font2)
 
         self.verticalLayout_2.addWidget(self.illness_label)
 
         self.illness_textEdit = QTextEdit(self.groupBox_2)
         self.illness_textEdit.setObjectName(u"illness_textEdit")
+        self.illness_textEdit.setMinimumSize(QSize(0, 85))
         self.illness_textEdit.setFont(font)
         self.illness_textEdit.setTabChangesFocus(True)
 
@@ -520,6 +527,7 @@ class Ui_MainWindow(object):
 
         self.Past_illness_textEdit = QTextEdit(self.groupBox_2)
         self.Past_illness_textEdit.setObjectName(u"Past_illness_textEdit")
+        self.Past_illness_textEdit.setMinimumSize(QSize(0, 85))
         self.Past_illness_textEdit.setFont(font)
         self.Past_illness_textEdit.setTabChangesFocus(True)
 
@@ -541,13 +549,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.setSpacing(25)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.verticalLayout_9.setContentsMargins(0, 30, -1, -1)
-        self.header_label2 = QLabel(self.scrollAreaWidgetContents)
-        self.header_label2.setObjectName(u"header_label2")
-        self.header_label2.setFont(font1)
-        self.header_label2.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_9.addWidget(self.header_label2)
-
         self.groupBox_3 = QGroupBox(self.scrollAreaWidgetContents)
         self.groupBox_3.setObjectName(u"groupBox_3")
         sizePolicy1.setHeightForWidth(self.groupBox_3.sizePolicy().hasHeightForWidth())
@@ -557,6 +558,15 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.setSpacing(8)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.verticalLayout_7.setContentsMargins(10, 15, 10, 15)
+        self.header_label2 = QLabel(self.groupBox_3)
+        self.header_label2.setObjectName(u"header_label2")
+        self.header_label2.setMinimumSize(QSize(0, 42))
+        self.header_label2.setSizeIncrement(QSize(0, 0))
+        self.header_label2.setFont(font1)
+        self.header_label2.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_7.addWidget(self.header_label2)
+
         self.horizontalLayout_18 = QHBoxLayout()
         self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
         self.thermal_label = QLabel(self.groupBox_3)
@@ -997,6 +1007,24 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_7.addLayout(self.horizontalLayout_27)
 
+        self.others_label_2 = QLabel(self.groupBox_3)
+        self.others_label_2.setObjectName(u"others_label_2")
+        font3 = QFont()
+        font3.setPointSize(14)
+        self.others_label_2.setFont(font3)
+        self.others_label_2.setMargin(0)
+        self.others_label_2.setIndent(1)
+
+        self.verticalLayout_7.addWidget(self.others_label_2)
+
+        self.others_textEdit_2 = QTextEdit(self.groupBox_3)
+        self.others_textEdit_2.setObjectName(u"others_textEdit_2")
+        self.others_textEdit_2.setMinimumSize(QSize(0, 85))
+        self.others_textEdit_2.setFont(font)
+        self.others_textEdit_2.setTabChangesFocus(True)
+
+        self.verticalLayout_7.addWidget(self.others_textEdit_2)
+
 
         self.verticalLayout_9.addWidget(self.groupBox_3)
 
@@ -1015,9 +1043,9 @@ class Ui_MainWindow(object):
 
         self.femaleOnly_label = QLabel(self.groupBox_4)
         self.femaleOnly_label.setObjectName(u"femaleOnly_label")
-        font3 = QFont()
-        font3.setPointSize(15)
-        self.femaleOnly_label.setFont(font3)
+        font4 = QFont()
+        font4.setPointSize(15)
+        self.femaleOnly_label.setFont(font4)
 
         self.horizontalLayout_37.addWidget(self.femaleOnly_label)
 
@@ -1036,6 +1064,8 @@ class Ui_MainWindow(object):
 
         self.femaleOnly_textEdit = QTextEdit(self.groupBox_4)
         self.femaleOnly_textEdit.setObjectName(u"femaleOnly_textEdit")
+        self.femaleOnly_textEdit.setMinimumSize(QSize(0, 80))
+        self.femaleOnly_textEdit.setSizeIncrement(QSize(0, 0))
         self.femaleOnly_textEdit.setFont(font)
         self.femaleOnly_textEdit.setTabChangesFocus(True)
 
@@ -1117,20 +1147,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_27.setContentsMargins(-1, 40, -1, -1)
         self.horizontalLayout_100 = QHBoxLayout()
         self.horizontalLayout_100.setObjectName(u"horizontalLayout_100")
-        self.horizontalSpacer_16 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_100.addItem(self.horizontalSpacer_16)
-
-        self.header_label3 = QLabel(self.scrollAreaWidgetContents)
-        self.header_label3.setObjectName(u"header_label3")
-        self.header_label3.setFont(font1)
-
-        self.horizontalLayout_100.addWidget(self.header_label3)
-
-        self.horizontalSpacer_17 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_100.addItem(self.horizontalSpacer_17)
-
 
         self.verticalLayout_27.addLayout(self.horizontalLayout_100)
 
@@ -1141,15 +1157,23 @@ class Ui_MainWindow(object):
         self.verticalLayout_26.setSpacing(8)
         self.verticalLayout_26.setObjectName(u"verticalLayout_26")
         self.verticalLayout_26.setContentsMargins(10, 12, 10, 10)
+        self.header_label3 = QLabel(self.groupBox_9)
+        self.header_label3.setObjectName(u"header_label3")
+        self.header_label3.setMinimumSize(QSize(0, 40))
+        self.header_label3.setFont(font1)
+        self.header_label3.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_26.addWidget(self.header_label3)
+
         self.horizontalLayout_101 = QHBoxLayout()
         self.horizontalLayout_101.setObjectName(u"horizontalLayout_101")
         self.will_label = QLabel(self.groupBox_9)
         self.will_label.setObjectName(u"will_label")
-        font4 = QFont()
-        font4.setPointSize(14)
-        font4.setBold(True)
-        font4.setItalic(True)
-        self.will_label.setFont(font4)
+        font5 = QFont()
+        font5.setPointSize(14)
+        font5.setBold(True)
+        font5.setItalic(True)
+        self.will_label.setFont(font5)
 
         self.horizontalLayout_101.addWidget(self.will_label)
 
@@ -1375,7 +1399,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_114.setObjectName(u"horizontalLayout_114")
         self.intellect_label = QLabel(self.groupBox_9)
         self.intellect_label.setObjectName(u"intellect_label")
-        self.intellect_label.setFont(font4)
+        self.intellect_label.setFont(font5)
 
         self.horizontalLayout_114.addWidget(self.intellect_label)
 
@@ -1424,7 +1448,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_117 = QHBoxLayout()
         self.horizontalLayout_117.setSpacing(250)
-        self.horizontalLayout_117.setObjectName(u"horizontalLayout_117")        
+        self.horizontalLayout_117.setObjectName(u"horizontalLayout_117")
         self.horizontalLayout_118 = QHBoxLayout()
         self.horizontalLayout_118.setSpacing(15)
         self.horizontalLayout_118.setObjectName(u"horizontalLayout_118")
@@ -1444,45 +1468,37 @@ class Ui_MainWindow(object):
         self.no_radioButton.setObjectName(u"no_radioButton")
         self.no_radioButton.setFont(font)
 
-        self.avarice_btn_group = QButtonGroup(self.groupBox_9)
-        self.avarice_btn_group.setObjectName(u"avarice_btn_group")
-        self.avarice_btn_group.addButton(self.yes_radioButton)
-        self.avarice_btn_group.addButton(self.no_radioButton)
-
         self.horizontalLayout_118.addWidget(self.no_radioButton)
+
 
         self.horizontalLayout_117.addLayout(self.horizontalLayout_118)
 
-        #self.widget2 = QWidget(self.groupBox_9)
-        #self.widget2.setObjectName(u"widget2")
-        self.horizontalLayout_119 = QHBoxLayout()
+        self.widget2 = QWidget(self.groupBox_9)
+        self.widget2.setObjectName(u"widget2")
+        self.horizontalLayout_119 = QHBoxLayout(self.widget2)
         self.horizontalLayout_119.setSpacing(15)
         self.horizontalLayout_119.setObjectName(u"horizontalLayout_119")
-        self.religiouos_label = QLabel(self.groupBox_9)
+        self.religiouos_label = QLabel(self.widget2)
         self.religiouos_label.setObjectName(u"religiouos_label")
         self.religiouos_label.setFont(font)
         self.religiouos_label.setIndent(3)
 
         self.horizontalLayout_119.addWidget(self.religiouos_label)
 
-        self.yes2_radioButton = QRadioButton(self.groupBox_9)
+        self.yes2_radioButton = QRadioButton(self.widget2)
         self.yes2_radioButton.setObjectName(u"yes2_radioButton")
         self.yes2_radioButton.setFont(font)
 
         self.horizontalLayout_119.addWidget(self.yes2_radioButton)
 
-        self.no2_radioButton = QRadioButton(self.groupBox_9)
+        self.no2_radioButton = QRadioButton(self.widget2)
         self.no2_radioButton.setObjectName(u"no2_radioButton")
         self.no2_radioButton.setFont(font)
 
-        self.religious_btn_group = QButtonGroup(self.groupBox_9)
-        self.religious_btn_group.setObjectName(u"religious_btn_group")
-        self.religious_btn_group.addButton(self.yes2_radioButton)
-        self.religious_btn_group.addButton(self.no2_radioButton)
-
         self.horizontalLayout_119.addWidget(self.no2_radioButton)
 
-        self.horizontalLayout_117.addLayout(self.horizontalLayout_119)
+
+        self.horizontalLayout_117.addWidget(self.widget2)
 
         self.horizontalSpacer_19 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
@@ -1493,7 +1509,7 @@ class Ui_MainWindow(object):
 
         self.dominating_label = QLabel(self.groupBox_9)
         self.dominating_label.setObjectName(u"dominating_label")
-        self.dominating_label.setFont(font4)
+        self.dominating_label.setFont(font5)
 
         self.verticalLayout_26.addWidget(self.dominating_label)
 
@@ -1534,7 +1550,7 @@ class Ui_MainWindow(object):
 
         self.sentimental_label = QLabel(self.groupBox_9)
         self.sentimental_label.setObjectName(u"sentimental_label")
-        self.sentimental_label.setFont(font4)
+        self.sentimental_label.setFont(font5)
 
         self.verticalLayout_26.addWidget(self.sentimental_label)
 
@@ -1575,7 +1591,7 @@ class Ui_MainWindow(object):
 
         self.sympathetic_label = QLabel(self.groupBox_9)
         self.sympathetic_label.setObjectName(u"sympathetic_label")
-        self.sympathetic_label.setFont(font4)
+        self.sympathetic_label.setFont(font5)
 
         self.verticalLayout_26.addWidget(self.sympathetic_label)
 
@@ -1596,35 +1612,30 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_26.addLayout(self.horizontalLayout_124)
 
-        # self.widget1 = QWidget(self.groupBox_9)
-        # self.widget1.setObjectName(u"widget1")
-        # self.widget1.setFocusPolicy(Qt.NoFocus)
-        self.horizontalLayout_125 = QHBoxLayout()
+        self.widget1 = QWidget(self.groupBox_9)
+        self.widget1.setObjectName(u"widget1")
+        self.widget1.setFocusPolicy(Qt.NoFocus)
+        self.horizontalLayout_125 = QHBoxLayout(self.widget1)
         self.horizontalLayout_125.setSpacing(30)
         self.horizontalLayout_125.setObjectName(u"horizontalLayout_125")
         self.horizontalLayout_125.setContentsMargins(0, 0, 0, 0)
-        self.work_label = QLabel(self.groupBox_9)
+        self.work_label = QLabel(self.widget1)
         self.work_label.setObjectName(u"work_label")
         self.work_label.setFont(font)
         self.work_label.setIndent(3)
 
         self.horizontalLayout_125.addWidget(self.work_label)
 
-        self.slow_radioButton = QRadioButton(self.groupBox_9)
+        self.slow_radioButton = QRadioButton(self.widget1)
         self.slow_radioButton.setObjectName(u"slow_radioButton")
         self.slow_radioButton.setFont(font)
 
         self.horizontalLayout_125.addWidget(self.slow_radioButton)
 
-        self.hurry_radioButton = QRadioButton(self.groupBox_9)
+        self.hurry_radioButton = QRadioButton(self.widget1)
         self.hurry_radioButton.setObjectName(u"hurry_radioButton")
         self.hurry_radioButton.setFont(font)
 
-        self.work_btn_group = QButtonGroup(self.groupBox_9)
-        self.work_btn_group.setObjectName(u"work_btn_group")
-        self.work_btn_group.addButton(self.slow_radioButton)
-        self.work_btn_group.addButton(self.hurry_radioButton)
-        
         self.horizontalLayout_125.addWidget(self.hurry_radioButton)
 
         self.horizontalSpacer_20 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
@@ -1632,7 +1643,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_125.addItem(self.horizontalSpacer_20)
 
 
-        self.verticalLayout_26.addLayout(self.horizontalLayout_125)
+        self.verticalLayout_26.addWidget(self.widget1)
 
         self.horizontalLayout_126 = QHBoxLayout()
         self.horizontalLayout_126.setObjectName(u"horizontalLayout_126")
@@ -1665,14 +1676,15 @@ class Ui_MainWindow(object):
         self.verticalLayout_29.setObjectName(u"verticalLayout_29")
         self.pastHistory_label = QLabel(self.groupBox_10)
         self.pastHistory_label.setObjectName(u"pastHistory_label")
-        font5 = QFont()
-        font5.setPointSize(16)
-        self.pastHistory_label.setFont(font5)
+        font6 = QFont()
+        font6.setPointSize(16)
+        self.pastHistory_label.setFont(font6)
 
         self.verticalLayout_29.addWidget(self.pastHistory_label)
 
         self.pastHistory_textEdit = QTextEdit(self.groupBox_10)
         self.pastHistory_textEdit.setObjectName(u"pastHistory_textEdit")
+        self.pastHistory_textEdit.setMinimumSize(QSize(0, 80))
         self.pastHistory_textEdit.setFont(font)
         self.pastHistory_textEdit.setTabChangesFocus(True)
 
@@ -1685,7 +1697,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_30.setObjectName(u"verticalLayout_30")
         self.familyHistory_label = QLabel(self.groupBox_10)
         self.familyHistory_label.setObjectName(u"familyHistory_label")
-        self.familyHistory_label.setFont(font5)
+        self.familyHistory_label.setMinimumSize(QSize(0, 33))
+        self.familyHistory_label.setFont(font6)
+        self.familyHistory_label.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
 
         self.verticalLayout_30.addWidget(self.familyHistory_label)
 
@@ -1726,6 +1740,25 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_28.addLayout(self.verticalLayout_30)
 
+        self.others_label = QLabel(self.groupBox_10)
+        self.others_label.setObjectName(u"others_label")
+        self.others_label.setMinimumSize(QSize(0, 33))
+        font7 = QFont()
+        font7.setPointSize(15)
+        font7.setBold(False)
+        self.others_label.setFont(font7)
+        self.others_label.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
+
+        self.verticalLayout_28.addWidget(self.others_label)
+
+        self.others_textEdit = QTextEdit(self.groupBox_10)
+        self.others_textEdit.setObjectName(u"others_textEdit")
+        self.others_textEdit.setMinimumSize(QSize(0, 100))
+        self.others_textEdit.setFont(font)
+        self.others_textEdit.setTabChangesFocus(True)
+
+        self.verticalLayout_28.addWidget(self.others_textEdit)
+
 
         self.verticalLayout_27.addWidget(self.groupBox_10)
 
@@ -1758,14 +1791,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.physicalExamination_label = QLabel(self.scrollAreaWidgetContents)
         self.physicalExamination_label.setObjectName(u"physicalExamination_label")
-        font6 = QFont()
-        font6.setPointSize(14)
-        self.physicalExamination_label.setFont(font6)
+        self.physicalExamination_label.setFont(font3)
 
         self.verticalLayout_32.addWidget(self.physicalExamination_label)
 
         self.physicalExamination_textEdit = QTextEdit(self.scrollAreaWidgetContents)
         self.physicalExamination_textEdit.setObjectName(u"physicalExamination_textEdit")
+        self.physicalExamination_textEdit.setMinimumSize(QSize(0, 85))
         self.physicalExamination_textEdit.setFont(font)
         self.physicalExamination_textEdit.setTabChangesFocus(True)
 
@@ -1773,16 +1805,41 @@ class Ui_MainWindow(object):
 
         self.laboratoryInvestigation_label = QLabel(self.scrollAreaWidgetContents)
         self.laboratoryInvestigation_label.setObjectName(u"laboratoryInvestigation_label")
-        self.laboratoryInvestigation_label.setFont(font6)
+        self.laboratoryInvestigation_label.setFont(font3)
 
         self.verticalLayout_32.addWidget(self.laboratoryInvestigation_label)
 
         self.laboratoryInvestigation_textEdit = QTextEdit(self.scrollAreaWidgetContents)
         self.laboratoryInvestigation_textEdit.setObjectName(u"laboratoryInvestigation_textEdit")
+        self.laboratoryInvestigation_textEdit.setMinimumSize(QSize(0, 85))
         self.laboratoryInvestigation_textEdit.setFont(font)
         self.laboratoryInvestigation_textEdit.setTabChangesFocus(True)
 
         self.verticalLayout_32.addWidget(self.laboratoryInvestigation_textEdit)
+
+        self.label = QLabel(self.scrollAreaWidgetContents)
+        self.label.setObjectName(u"label")
+        self.label.setMinimumSize(QSize(90, 50))
+        font8 = QFont()
+        font8.setFamilies([u"Quicksand"])
+        font8.setPointSize(20)
+        font8.setBold(True)
+        self.label.setFont(font8)
+        self.label.setFocusPolicy(Qt.NoFocus)
+        self.label.setLineWidth(1)
+        self.label.setAlignment(Qt.AlignBottom|Qt.AlignHCenter)
+        self.label.setMargin(0)
+        self.label.setIndent(0)
+
+        self.verticalLayout_32.addWidget(self.label)
+
+        self.prescription_textEdit = QTextEdit(self.scrollAreaWidgetContents)
+        self.prescription_textEdit.setObjectName(u"prescription_textEdit")
+        self.prescription_textEdit.setMinimumSize(QSize(0, 300))
+        self.prescription_textEdit.setFont(font)
+        self.prescription_textEdit.setTabChangesFocus(True)
+
+        self.verticalLayout_32.addWidget(self.prescription_textEdit)
 
 
         self.verticalLayout_31.addLayout(self.verticalLayout_32)
@@ -1795,7 +1852,7 @@ class Ui_MainWindow(object):
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
-        self.horizontalLayout_130.addWidget(self.scrollArea)
+        self.verticalLayout_10.addWidget(self.scrollArea)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
@@ -1809,6 +1866,8 @@ class Ui_MainWindow(object):
         self.menuWindow.setObjectName(u"menuWindow")
         self.menuSettings = QMenu(self.menubar)
         self.menuSettings.setObjectName(u"menuSettings")
+        self.menuAbout_Us = QMenu(self.menubar)
+        self.menuAbout_Us.setObjectName(u"menuAbout_Us")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -1875,7 +1934,6 @@ class Ui_MainWindow(object):
         self.physicalExamination_label.setBuddy(self.physicalExamination_textEdit)
         self.laboratoryInvestigation_label.setBuddy(self.laboratoryInvestigation_textEdit)
 #endif // QT_CONFIG(shortcut)
-        QWidget.setTabOrder(self.scrollArea, self.name_lineEdit)
         QWidget.setTabOrder(self.name_lineEdit, self.male_radiobtn)
         QWidget.setTabOrder(self.male_radiobtn, self.female_radiobtn)
         QWidget.setTabOrder(self.female_radiobtn, self.age_lineEdit)
@@ -1920,7 +1978,8 @@ class Ui_MainWindow(object):
         QWidget.setTabOrder(self.love_checkBox, self.joy_checkBox)
         QWidget.setTabOrder(self.joy_checkBox, self.generalModalities_lineEdit)
         QWidget.setTabOrder(self.generalModalities_lineEdit, self.nailAnalysis_lineEdit)
-        QWidget.setTabOrder(self.nailAnalysis_lineEdit, self.femaleOnly_textEdit)
+        QWidget.setTabOrder(self.nailAnalysis_lineEdit, self.others_textEdit_2)
+        QWidget.setTabOrder(self.others_textEdit_2, self.femaleOnly_textEdit)
         QWidget.setTabOrder(self.femaleOnly_textEdit, self.pregnancy_lineEdit)
         QWidget.setTabOrder(self.pregnancy_lineEdit, self.marriedFor_lineEdit)
         QWidget.setTabOrder(self.marriedFor_lineEdit, self.gravida_lineEdit)
@@ -1955,14 +2014,17 @@ class Ui_MainWindow(object):
         QWidget.setTabOrder(self.aggravation_lineEdit, self.pastHistory_textEdit)
         QWidget.setTabOrder(self.pastHistory_textEdit, self.fatherSide_lineEdit)
         QWidget.setTabOrder(self.fatherSide_lineEdit, self.motherSide_lineEdit)
-        QWidget.setTabOrder(self.motherSide_lineEdit, self.physicalExamination_textEdit)
+        QWidget.setTabOrder(self.motherSide_lineEdit, self.others_textEdit)
+        QWidget.setTabOrder(self.others_textEdit, self.physicalExamination_textEdit)
         QWidget.setTabOrder(self.physicalExamination_textEdit, self.laboratoryInvestigation_textEdit)
-        QWidget.setTabOrder(self.laboratoryInvestigation_textEdit, self.observation_lineEdit)
+        QWidget.setTabOrder(self.laboratoryInvestigation_textEdit, self.prescription_textEdit)
+        QWidget.setTabOrder(self.prescription_textEdit, self.scrollArea)
 
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuEdit.menuAction())
         self.menubar.addAction(self.menuWindow.menuAction())
         self.menubar.addAction(self.menuSettings.menuAction())
+        self.menubar.addAction(self.menuAbout_Us.menuAction())
         self.menuFile.addAction(self.actionNew)
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addAction(self.actionSave)
@@ -1982,6 +2044,7 @@ class Ui_MainWindow(object):
         self.menuSettings.addAction(self.actionFont_Color)
         self.menuSettings.addSeparator()
         self.menuSettings.addAction(self.actionBackground)
+        self.menuAbout_Us.addAction(self.actionAbout_Us)
 
         self.retranslateUi(MainWindow)
 
@@ -2009,6 +2072,7 @@ class Ui_MainWindow(object):
         self.actionFont_Family.setText(QCoreApplication.translate("MainWindow", u"Font Family", None))
         self.actionFont_Color.setText(QCoreApplication.translate("MainWindow", u"Font Color", None))
         self.actionBackground.setText(QCoreApplication.translate("MainWindow", u"Background", None))
+        self.actionAbout_Us.setText(QCoreApplication.translate("MainWindow", u"About Us", None))
         self.header_label.setText(QCoreApplication.translate("MainWindow", u"GENERAL INFORMATION", None))
         self.id_label.setText(QCoreApplication.translate("MainWindow", u"Patient ID:", None))
         self.name_label.setText(QCoreApplication.translate("MainWindow", u"Patient Name:", None))
@@ -2019,11 +2083,13 @@ class Ui_MainWindow(object):
         self.age_label.setText(QCoreApplication.translate("MainWindow", u"Age:", None))
         self.job_label.setText(QCoreApplication.translate("MainWindow", u"Occupation:", None))
         self.job_comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Student", None))
-        self.job_comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"Teacher", None))
+        self.job_comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"House wife", None))
         self.job_comboBox.setItemText(2, QCoreApplication.translate("MainWindow", u"Farmer", None))
-        self.job_comboBox.setItemText(3, QCoreApplication.translate("MainWindow", u"Businessman", None))
-        self.job_comboBox.setItemText(4, QCoreApplication.translate("MainWindow", u"Worker", None))
-        self.job_comboBox.setItemText(5, QCoreApplication.translate("MainWindow", u"Others", None))
+        self.job_comboBox.setItemText(3, QCoreApplication.translate("MainWindow", u"Teacher", None))
+        self.job_comboBox.setItemText(4, QCoreApplication.translate("MainWindow", u"Businessman", None))
+        self.job_comboBox.setItemText(5, QCoreApplication.translate("MainWindow", u"Doctor", None))
+        self.job_comboBox.setItemText(6, QCoreApplication.translate("MainWindow", u"Worker", None))
+        self.job_comboBox.setItemText(7, QCoreApplication.translate("MainWindow", u"Others", None))
 
         self.marriage_label.setText(QCoreApplication.translate("MainWindow", u"Marital Status:", None))
         self.Marriage_comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Married", None))
@@ -2081,6 +2147,8 @@ class Ui_MainWindow(object):
         self.disappointed_checkBox.setText(QCoreApplication.translate("MainWindow", u"Disappointed", None))
         self.generalModalities_label.setText(QCoreApplication.translate("MainWindow", u"General Modalities:", None))
         self.nailAnalysis_label.setText(QCoreApplication.translate("MainWindow", u"Nail Analysis:", None))
+        self.others_label_2.setText(QCoreApplication.translate("MainWindow", u"Others Symptoms:", None))
+        self.others_textEdit_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Write Here...", None))
         self.femaleOnly_label.setText(QCoreApplication.translate("MainWindow", u"For Female Only ", None))
         self.label_23.setText(QCoreApplication.translate("MainWindow", u"(Is sex desire Absent or Excessive or Others problem )", None))
         self.femaleOnly_textEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Write detailed history ...", None))
@@ -2130,14 +2198,19 @@ class Ui_MainWindow(object):
         self.familyHistory_label.setText(QCoreApplication.translate("MainWindow", u"Family History:", None))
         self.fatherSide_label.setText(QCoreApplication.translate("MainWindow", u"Father Side:", None))
         self.motherSide_label.setText(QCoreApplication.translate("MainWindow", u"Mother Side:", None))
+        self.others_label.setText(QCoreApplication.translate("MainWindow", u"Others Symptoms:", None))
+        self.others_textEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Write here...", None))
         self.observation_lineEdit.setText(QCoreApplication.translate("MainWindow", u"OBSERVATION & EXAMINATION", None))
         self.physicalExamination_label.setText(QCoreApplication.translate("MainWindow", u"Physical Examination:", None))
         self.physicalExamination_textEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Write Here ...", None))
         self.laboratoryInvestigation_label.setText(QCoreApplication.translate("MainWindow", u"Laboratory Investigations:", None))
         self.laboratoryInvestigation_textEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Write Here ...", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Prescription", None))
+        self.prescription_textEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Write Here...", None))
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
         self.menuEdit.setTitle(QCoreApplication.translate("MainWindow", u"Edit", None))
         self.menuWindow.setTitle(QCoreApplication.translate("MainWindow", u"Window", None))
         self.menuSettings.setTitle(QCoreApplication.translate("MainWindow", u"Settings", None))
+        self.menuAbout_Us.setTitle(QCoreApplication.translate("MainWindow", u"Help", None))
     # retranslateUi
 

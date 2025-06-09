@@ -1,18 +1,20 @@
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget
-from PySide6.QtGui import QShortcut, QKeySequence
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QButtonGroup
+from PySide6.QtGui import QShortcut, QKeySequence, QIcon
 from app import Ui_MainWindow
 import os
 from PySide6 import QtCore, QtWidgets
 from datetime import datetime
 import json
+from about_us import AboutDialog  # Assuming you have an about_us.py file with the AboutDialog class
 
 class UserInterface(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowTitle("Patient's Case Study")
-        #self.setWindowIcon(QIcon("Qt_app/stethoscope.png"))
-        self.setMinimumSize(1200, 1000)
+        self.setWindowTitle("Doctor's Diary")
+        self.setWindowIcon(QIcon("Doctors_dairy/report.png"))
+        self.setBaseSize(1200, 800)
+        self.setMinimumSize(1150, 600)
         self.show()
         self.dateEdit.setDate(QtCore.QDate.currentDate())
         self.actionSave.triggered.connect(self.save_file)
@@ -32,12 +34,24 @@ class UserInterface(QMainWindow, Ui_MainWindow):
         self.actionQuit.triggered.connect(self.quit)
         quit_shortcut = QShortcut(QKeySequence("Ctrl+Q"), self)
         quit_shortcut.activated.connect(self.quit)
+        self.actionAbout_Us.triggered.connect(self.show_about_dialog)
         self.setStyleSheet("""
             QLineEdit:focus, QTextEdit:focus, QRadioButton:focus, QCheckBox:focus, QComboBox:focus, QSpinBox:focus, QDateEdit:focus {
                 border: 2px solid #0078D7;  /* Blue border */
                 border-radius: 4px;
             }
         """)
+        self.avarice_buttonGroup = QButtonGroup(self)
+        self.avarice_buttonGroup.addButton(self.yes_radioButton)
+        self.avarice_buttonGroup.addButton(self.no_radioButton)
+
+        self.religious_btngroup = QButtonGroup(self)
+        self.religious_btngroup.addButton(self.yes2_radioButton)
+        self.religious_btngroup.addButton(self.no2_radioButton)
+
+        self.gender_buttonGroup = QButtonGroup(self)
+        self.gender_buttonGroup.addButton(self.male_radiobtn)
+        self.gender_buttonGroup.addButton(self.female_radiobtn)
 
     def quit(self):
         self.close()
@@ -214,6 +228,10 @@ class UserInterface(QMainWindow, Ui_MainWindow):
             self.clear_form()
             self.id_lineEdit.setText(self.patient_id())
             self.statusbar.showMessage("Form closed.", 3000)
+
+    def show_about_dialog(self):
+        dialog = AboutDialog(self)
+        dialog.exec()
 
 if __name__ == "__main__":
     app = QApplication([])

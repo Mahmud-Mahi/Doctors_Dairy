@@ -1,6 +1,17 @@
-import os, json
+import os, json, platform
 
-config_path = os.path.expanduser("~/.config/doctors_dairy/config.json")
+def get_config_directory():
+    """Get the configuration directory based on the operating system."""
+    if platform.system() == "Windows":
+        base_dir = os.getenv('APPDATA') or os.path.expanduser('~\\AppData\\Roaming')
+    else:  # Linux / macOS systems
+        base_dir = os.path.expanduser('~/.config')
+    
+    config_dir = os.path.join(base_dir, 'doctors_diary')
+    os.makedirs(config_dir, exist_ok=True)
+    return os.path.join(config_dir, 'config.json')
+    
+config_path = get_config_directory()
 
 def load_config():
     """Load configuration from the JSON file."""

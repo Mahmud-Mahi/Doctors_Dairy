@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QButtonGroup
-from PySide6.QtGui import QShortcut, QKeySequence, QIcon, QAction
+from PySide6.QtGui import QShortcut, QKeySequence, QIcon, QAction, QFontDatabase, QFont
 from main_gui import Ui_MainWindow
-import os
+import os, sys
 from PySide6 import QtCore, QtWidgets
 from datetime import datetime
 import json
@@ -16,6 +16,7 @@ class UserInterface(QMainWindow, Ui_MainWindow):
         self.setWindowTitle("Doctor's Diary")
         self.setMinimumSize(950, 300)
         self.show()
+        self.load_bangla_font()
         self.load_custom_labels()
         self.dateEdit.setDisplayFormat("dd MMMM yyyy")
         self.dateEdit.setDate(QtCore.QDate.currentDate())
@@ -26,7 +27,7 @@ class UserInterface(QMainWindow, Ui_MainWindow):
         self.actionNew.triggered.connect(self.new_form)
         self.actionNew.setShortcut(QKeySequence("Ctrl+N"))
 
-        patient_ID = " " + self.patient_id()
+        patient_ID = self.patient_id()
         self.id_lineEdit.setText(patient_ID)
 
         self.actionOpen.triggered.connect(self.open_file)
@@ -82,16 +83,26 @@ class UserInterface(QMainWindow, Ui_MainWindow):
     def quit(self):
         self.close()
 
+    def get_record_file_path(self):
+        if os.name == 'nt':   # Windows
+            base_path = os.getenv('APPDATA') or os.path.expanduser('~\\AppData\\Roaming')
+        else:   # Linux / macOS
+            base_path = os.path.expanduser('~/.config')
+        
+        records_path = os.path.join(base_path, 'doctors_diary', 'records')
+        os.makedirs(records_path, exist_ok=True)
+        return records_path
+    
     def patient_id(self):
         today = datetime.now()
         prefix = today.strftime("%d%m") # e.g. 2505
         
         #count existing files for today
-        directory = "records"
+        directory = self.get_record_file_path()
         if not os.path.exists(directory):
             os.makedirs(directory)
 
-        count = sum(1 for filename in os.listdir("records") if filename.startswith(prefix)) + 1
+        count = sum(1 for filename in os.listdir(directory) if filename.startswith(prefix)) + 1
         
         # create patient ID
         return f"{prefix}{count:03d}"
@@ -101,8 +112,8 @@ class UserInterface(QMainWindow, Ui_MainWindow):
         data ={}
 
         if self.is_form_filled():
-            if not os.path.exists("records"):
-                os.makedirs("records")
+            recods_dir = self.get_record_file_path()
+            file_path = os.path.join(recods_dir, f"{file_name}.json")
 
             # Example for LineEdits
             for line_edit in self.findChildren(QtWidgets.QLineEdit):
@@ -132,7 +143,7 @@ class UserInterface(QMainWindow, Ui_MainWindow):
             for check_box in self.findChildren(QtWidgets.QCheckBox):
                 data[check_box.objectName()] = check_box.isChecked()
             
-            with open(f"records/{file_name}.json", "w") as file:
+            with open(file_path, "w") as file:
                 json.dump(data, file, indent=4)
             self.statusbar.showMessage("Form saved successfully.", 3000)
         else:
@@ -181,7 +192,7 @@ class UserInterface(QMainWindow, Ui_MainWindow):
     def open_file(self):
         file_dialog = QtWidgets.QFileDialog(self)
         file_dialog.setFileMode(QtWidgets.QFileDialog.ExistingFiles)
-        file_dialog.setDirectory("records")
+        file_dialog.setDirectory(self.get_record_file_path())
         file_dialog.setWindowTitle("Record Files")
         file_dialog.setNameFilter("JSON files (*.json)")
         file_dialog.setViewMode(QtWidgets.QFileDialog.List)
@@ -214,19 +225,17 @@ class UserInterface(QMainWindow, Ui_MainWindow):
                 widget.setChecked(False)
     
     def is_form_filled(self):
-        for line_edit in self.findChildren(QtWidgets.QLineEdit):
-            if line_edit.objectName() == "observation_lineEdit":
-                continue
-            elif line_edit.objectName() == "id_lineEdit":
-                continue
-            elif line_edit.text().strip():
-                #print(f"Filled LineEdit: {line_edit.objectName()} → {line_edit.text()}")
-                return True
-        return False
+        required_fields = [ self.name_lineEdit, self.age_lineEdit, self.contact_lineEdit ]
+        for field in required_fields:
+            if isinstance(field, QtWidgets.QLineEdit):
+                if not field.text().strip():
+                    return False
+        return True
     
     def is_form_saved(self):
         file_name = self.id_lineEdit.text().strip()
-        file_path = f"records/{file_name}.json"
+        records_dir = self.get_record_file_path()
+        file_path = os.path.join(records_dir, f"{file_name}.json")
         return os.path.exists(file_path)
 
     def new_form(self):
@@ -237,6 +246,7 @@ class UserInterface(QMainWindow, Ui_MainWindow):
             # Show the message box
             if message == QtWidgets.QMessageBox.Save:
                 self.save_file()
+                self.statusbar.showMessage("Form saved successfully.", 3000)
                 self.clear_form()
                 
             elif message == QtWidgets.QMessageBox.Discard:
@@ -244,11 +254,28 @@ class UserInterface(QMainWindow, Ui_MainWindow):
             else:
                 self.statusbar.showMessage("Form is already empty.", 3000)
                 return
+        # elif self.is_form_saved():
+        #     warning = QtWidgets.QMessageBox.warning(self, "New Form", "The current form is already saved. Do you want to overwrite?", QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No | QtWidgets.QMessageBox.Cancel)
+        #     if warning == QtWidgets.QMessageBox.Yes:
+        #         self.save_file()
+        #         self.statusbar.showMessage("Form overwritten successfully.", 3000)
+        #         self.clear_form()
+        #     elif warning == QtWidgets.QMessageBox.No:
+        #         self.clear_form()
+        #         self.statusbar.showMessage("Form cleared.", 3000)
+        #     else: 
+        #         self.statusbar.showMessage("Action cancelled.", 3000)
+        #         return
+        
+        elif not self.is_form_filled():
+            self.statusbar.showMessage("Please fill in the required fields.", 3000)
+
         else:
             self.clear_form()
         
     def close_form(self):
-        check_file = "records/" + self.id_lineEdit.text().strip() + ".json"
+        file_name = self.id_lineEdit.text().strip()
+        check_file = os.path.join(self.get_record_file_path(), f"{file_name}.json")
         if not os.path.exists(check_file):
             if self.is_form_filled():
                 message = QtWidgets.QMessageBox.warning(self, "Close Form", "Do you want to save the current form before closing?", QtWidgets.QMessageBox.Save | QtWidgets.QMessageBox.Discard | QtWidgets.QMessageBox.Cancel)
@@ -340,7 +367,7 @@ class UserInterface(QMainWindow, Ui_MainWindow):
                     background-color: #f5f5f5;
                     color: #000000;
                 }
-                QLineEdit, QTextEdit, QComboBox, QSpinBox, QDateEdit, QRadioButton, QCheckBox {
+                QLineEdit, QTextEdit, QComboBox, QSpinBox, QDateEdit, QCheckBox{
                     background-color: #E8E8E8;
                     color: #000000;
                     border: 1px solid #CCCCCC;
@@ -352,6 +379,21 @@ class UserInterface(QMainWindow, Ui_MainWindow):
                 QLineEdit:focus, QTextEdit:focus, QRadioButton:focus, QCheckBox:focus, QComboBox:focus, QSpinBox:focus, QDateEdit:focus {
                     border: 2px solid #0078D7;  /* Blue border */
                     border-radius: 4px;
+                }
+                QGroupBox {
+                    border: 2px solid #CCCCCC;
+                    border-radius: 4px;
+                }
+                QRadioButton::indicator:checked {
+                     background-color: #707070;  
+                     border: 4px solid #a9a9a9;
+                    border-radius: 7px;
+                }
+
+                 QRadioButton::indicator:unchecked {
+                    background-color: #ffffff;
+                    border: 2px solid #a9a9a9;
+                    border-radius: 7px;
                 }
             """)
         elif mode == "system":
@@ -392,8 +434,41 @@ class UserInterface(QMainWindow, Ui_MainWindow):
         #Apply the default theme
         self.apply_theme("system")
         self.statusbar.showMessage("Configuration reset to defaults.", 3000)
+    
+    def resource_path(self, relative_path):
+        try:
+            # When bundled with PyInstaller
+            base_path = sys._MEIPASS
+        except AttributeError:
+            # When running in a normal Python environment
+            base_path = os.path.dirname(os.path.abspath(__file__))
+        return os.path.join(base_path, relative_path)
 
+    def load_bangla_font(self):
+        if os.name == 'nt':  # Windows
+            font_path = os.getenv('APPDATA') or os.path.expanduser('~\\AppData\\Roaming\\doctors_diary\\fonts')
+        else:  # Linux / macOS
+            font_path = os.path.expanduser('~/.config/doctors_diary/fonts')
+            # if system has noto sans bengali font delete the fonts directory
+        
+        if not os.path.exists(font_path):
+            os.makedirs(font_path, exist_ok=True)
+        
+        # Add the Bangla font to the application
+        bundled_font_dir = self.resource_path("fonts")
+        if os.path.exists(bundled_font_dir):
+            for font_file in os.listdir(bundled_font_dir):
+                if font_file.endswith('.ttf') or font_file.endswith('.otf'):
+                    font_full_path = os.path.join(bundled_font_dir, font_file)
+                    QFontDatabase.addApplicationFont(font_full_path)
 
+        
+        # Load all TTF/OTF font files from the directory
+        font_files = [f for f in os.listdir(font_path) if f.endswith('.ttf') or f.endswith('.otf')]
+        for font_file in font_files:
+            font_full_path = os.path.join(font_path, font_file)
+            if os.path.exists(font_full_path):
+                QFontDatabase.applicationFontFamilies(font_full_path)
 
 
 if __name__ == "__main__":

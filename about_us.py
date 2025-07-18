@@ -44,7 +44,7 @@ class AboutDialog(QDialog):
         name_label = QLabel("Doctor's Dairy")
         name_label.setStyleSheet("font-size: 25px; font-weight: bold;")
         desc_label = QLabel("A simple diary application for doctors to manage their patients' records.\nThe idea of Dr. Sheikh Rizwanur Rahman\nDeveloped by Mahmud Mahi.")
-        others_label = QLabel("Version 1.0\n© 2025 All Rights Reserved.")
+        others_label = QLabel("Version 1.0.0\n© 2025 All Rights Reserved.")
         desc_label.setStyleSheet("font-size: 18px;")
         others_label.setStyleSheet("font-size: 14px; color: gray;")
         others_label.setAlignment(Qt.AlignCenter)

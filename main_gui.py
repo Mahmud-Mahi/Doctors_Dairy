@@ -17,11 +17,11 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateEdit,
-    QGridLayout, QGroupBox, QHBoxLayout, QLabel,
-    QLayout, QLineEdit, QMainWindow, QMenu,
-    QMenuBar, QRadioButton, QScrollArea, QSizePolicy,
-    QSpacerItem, QStatusBar, QTextEdit, QVBoxLayout,
-    QWidget)
+    QFrame, QGridLayout, QGroupBox, QHBoxLayout,
+    QLabel, QLayout, QLineEdit, QMainWindow,
+    QMenu, QMenuBar, QRadioButton, QScrollArea,
+    QSizePolicy, QSpacerItem, QStatusBar, QTextEdit,
+    QVBoxLayout, QWidget)
 import resource_rc
 
 class Ui_MainWindow(object):
@@ -170,7 +170,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 972, 5088))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 972, 5111))
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
@@ -181,34 +181,40 @@ class Ui_MainWindow(object):
         self.verticalLayout_33.setObjectName(u"verticalLayout_33")
         self.groupBox_Header = QGroupBox(self.scrollAreaWidgetContents)
         self.groupBox_Header.setObjectName(u"groupBox_Header")
-        self.groupBox_Header.setMinimumSize(QSize(0, 150))
+        self.groupBox_Header.setMinimumSize(QSize(0, 180))
         self.gridLayout_3 = QGridLayout(self.groupBox_Header)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.institudeEN_name = QLabel(self.groupBox_Header)
-        self.institudeEN_name.setObjectName(u"institudeEN_name")
-        self.institudeEN_name.setFont(font)
-        self.institudeEN_name.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_3.addWidget(self.institudeEN_name, 2, 0, 1, 1)
-
-        self.owner_name = QLabel(self.groupBox_Header)
-        self.owner_name.setObjectName(u"owner_name")
+        self.instituteBN_name = QLabel(self.groupBox_Header)
+        self.instituteBN_name.setObjectName(u"instituteBN_name")
+        self.instituteBN_name.setMinimumSize(QSize(0, 35))
         font1 = QFont()
-        font1.setFamilies([u"Li Opu Unicode"])
-        font1.setPointSize(15)
-        font1.setBold(False)
-        self.owner_name.setFont(font1)
+        font1.setFamilies([u"Noto Sans Bengali UI"])
+        font1.setPointSize(18)
+        font1.setBold(True)
+        font1.setItalic(False)
+        self.instituteBN_name.setFont(font1)
+        self.instituteBN_name.setAlignment(Qt.AlignBottom|Qt.AlignHCenter)
 
-        self.gridLayout_3.addWidget(self.owner_name, 0, 2, 1, 1)
+        self.gridLayout_3.addWidget(self.instituteBN_name, 0, 0, 1, 1)
 
-        self.position_label = QLabel(self.groupBox_Header)
-        self.position_label.setObjectName(u"position_label")
+        self.owner_occupation = QLabel(self.groupBox_Header)
+        self.owner_occupation.setObjectName(u"owner_occupation")
+        self.owner_occupation.setMinimumSize(QSize(0, 50))
         font2 = QFont()
-        font2.setFamilies([u"Li Mehdi Ekushey Unicode"])
-        font2.setPointSize(12)
-        self.position_label.setFont(font2)
+        font2.setFamilies([u"Noto Sans Bengali"])
+        font2.setPointSize(11)
+        font2.setBold(False)
+        font2.setItalic(False)
+        self.owner_occupation.setFont(font2)
+        self.owner_occupation.setFrameShadow(QFrame.Plain)
+        self.owner_occupation.setLineWidth(2)
+        self.owner_occupation.setMidLineWidth(2)
+        self.owner_occupation.setScaledContents(True)
+        self.owner_occupation.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.owner_occupation.setWordWrap(True)
+        self.owner_occupation.setMargin(0)
 
-        self.gridLayout_3.addWidget(self.position_label, 2, 2, 1, 1)
+        self.gridLayout_3.addWidget(self.owner_occupation, 4, 3, 1, 1)
 
         self.contact_num = QLabel(self.groupBox_Header)
         self.contact_num.setObjectName(u"contact_num")
@@ -217,78 +223,82 @@ class Ui_MainWindow(object):
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.contact_num.sizePolicy().hasHeightForWidth())
         self.contact_num.setSizePolicy(sizePolicy2)
-        self.contact_num.setFont(font)
+        font3 = QFont()
+        font3.setPointSize(13)
+        self.contact_num.setFont(font3)
         self.contact_num.setAlignment(Qt.AlignCenter)
         self.contact_num.setMargin(0)
 
         self.gridLayout_3.addWidget(self.contact_num, 3, 0, 1, 1)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.institudeEN_name = QLabel(self.groupBox_Header)
+        self.institudeEN_name.setObjectName(u"institudeEN_name")
+        self.institudeEN_name.setMinimumSize(QSize(0, 25))
+        self.institudeEN_name.setFont(font3)
+        self.institudeEN_name.setAlignment(Qt.AlignBottom|Qt.AlignHCenter)
 
-        self.gridLayout_3.addItem(self.horizontalSpacer_4, 0, 1, 1, 1)
-
-        self.certificate_info = QLabel(self.groupBox_Header)
-        self.certificate_info.setObjectName(u"certificate_info")
-        self.certificate_info.setFont(font2)
-
-        self.gridLayout_3.addWidget(self.certificate_info, 3, 2, 1, 1)
-
-        self.instituteBN_name = QLabel(self.groupBox_Header)
-        self.instituteBN_name.setObjectName(u"instituteBN_name")
-        font3 = QFont()
-        font3.setFamilies([u"Li Shadhinata 2.0 Unicode"])
-        font3.setPointSize(17)
-        font3.setBold(False)
-        font3.setItalic(False)
-        self.instituteBN_name.setFont(font3)
-        self.instituteBN_name.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_3.addWidget(self.instituteBN_name, 0, 0, 1, 1)
-
-        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_3.addItem(self.horizontalSpacer_5, 2, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.institudeEN_name, 2, 0, 1, 1)
 
         self.comboBox_location = QComboBox(self.groupBox_Header)
         self.comboBox_location.addItem("")
         self.comboBox_location.addItem("")
         self.comboBox_location.addItem("")
         self.comboBox_location.setObjectName(u"comboBox_location")
-        self.comboBox_location.setMinimumSize(QSize(0, 32))
+        self.comboBox_location.setMinimumSize(QSize(0, 36))
         font4 = QFont()
-        font4.setFamilies([u"Li Shadhinata 2.0 Unicode"])
-        font4.setPointSize(13)
+        font4.setFamilies([u"Noto Sans Bengali"])
+        font4.setPointSize(12)
         font4.setBold(False)
         font4.setItalic(False)
         self.comboBox_location.setFont(font4)
-        self.comboBox_location.setFocusPolicy(Qt.NoFocus)
+        self.comboBox_location.setFocusPolicy(Qt.ClickFocus)
         self.comboBox_location.setLayoutDirection(Qt.LeftToRight)
-        self.comboBox_location.setEditable(False)
+        self.comboBox_location.setEditable(True)
         self.comboBox_location.setInsertPolicy(QComboBox.InsertAtBottom)
         self.comboBox_location.setSizeAdjustPolicy(QComboBox.AdjustToContents)
         self.comboBox_location.setIconSize(QSize(16, 16))
 
         self.gridLayout_3.addWidget(self.comboBox_location, 4, 0, 1, 1)
 
-        self.owner_occupation = QLabel(self.groupBox_Header)
-        self.owner_occupation.setObjectName(u"owner_occupation")
+        self.certificate_info = QLabel(self.groupBox_Header)
+        self.certificate_info.setObjectName(u"certificate_info")
+        self.certificate_info.setMinimumSize(QSize(0, 30))
         font5 = QFont()
-        font5.setFamilies([u"Li Opu Unicode"])
-        font5.setPointSize(13)
-        font5.setBold(False)
-        font5.setItalic(False)
-        self.owner_occupation.setFont(font5)
-        self.owner_occupation.setWordWrap(True)
+        font5.setFamilies([u"Noto Sans Bengali"])
+        font5.setPointSize(12)
+        self.certificate_info.setFont(font5)
+        self.certificate_info.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
-        self.gridLayout_3.addWidget(self.owner_occupation, 4, 2, 1, 1)
+        self.gridLayout_3.addWidget(self.certificate_info, 3, 3, 1, 1)
 
-        self.horizontalSpacer_7 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.owner_name = QLabel(self.groupBox_Header)
+        self.owner_name.setObjectName(u"owner_name")
+        font6 = QFont()
+        font6.setFamilies([u"Noto Sans Bengali"])
+        font6.setPointSize(16)
+        font6.setBold(False)
+        font6.setItalic(False)
+        self.owner_name.setFont(font6)
 
-        self.gridLayout_3.addItem(self.horizontalSpacer_7, 3, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.owner_name, 0, 3, 1, 1)
 
-        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout_3.addItem(self.horizontalSpacer_6, 4, 1, 1, 1)
+        self.gridLayout_3.addItem(self.horizontalSpacer_5, 2, 1, 1, 1)
+
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_3.addItem(self.horizontalSpacer_4, 0, 1, 1, 1)
+
+        self.position_label = QLabel(self.groupBox_Header)
+        self.position_label.setObjectName(u"position_label")
+        font7 = QFont()
+        font7.setFamilies([u"Noto Sans Bengali"])
+        font7.setPointSize(13)
+        self.position_label.setFont(font7)
+        self.position_label.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
+
+        self.gridLayout_3.addWidget(self.position_label, 2, 3, 1, 1)
 
 
         self.verticalLayout_33.addWidget(self.groupBox_Header)
@@ -312,11 +322,11 @@ class Ui_MainWindow(object):
         self.header_label = QLabel(self.groupBox)
         self.header_label.setObjectName(u"header_label")
         self.header_label.setMinimumSize(QSize(0, 42))
-        font6 = QFont()
-        font6.setFamilies([u"DejaVu Serif"])
-        font6.setPointSize(18)
-        font6.setBold(True)
-        self.header_label.setFont(font6)
+        font8 = QFont()
+        font8.setFamilies([u"DejaVu Serif"])
+        font8.setPointSize(18)
+        font8.setBold(True)
+        self.header_label.setFont(font8)
         self.header_label.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout.addWidget(self.header_label)
@@ -375,6 +385,7 @@ class Ui_MainWindow(object):
         self.name_lineEdit.setSizePolicy(sizePolicy4)
         self.name_lineEdit.setMinimumSize(QSize(250, 0))
         self.name_lineEdit.setFont(font)
+        self.name_lineEdit.setClearButtonEnabled(False)
 
         self.horizontalLayout_2.addWidget(self.name_lineEdit)
 
@@ -658,20 +669,20 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.illness_label = QLabel(self.groupBox_2)
         self.illness_label.setObjectName(u"illness_label")
-        font7 = QFont()
-        font7.setFamilies([u"DejaVu Serif"])
-        font7.setPointSize(13)
-        self.illness_label.setFont(font7)
+        font9 = QFont()
+        font9.setFamilies([u"DejaVu Serif"])
+        font9.setPointSize(13)
+        self.illness_label.setFont(font9)
 
         self.verticalLayout_2.addWidget(self.illness_label)
 
         self.illness_textEdit = QTextEdit(self.groupBox_2)
         self.illness_textEdit.setObjectName(u"illness_textEdit")
         self.illness_textEdit.setMinimumSize(QSize(0, 85))
-        font8 = QFont()
-        font8.setFamilies([u"Li Opu Unicode"])
-        font8.setPointSize(12)
-        self.illness_textEdit.setFont(font8)
+        font10 = QFont()
+        font10.setFamilies([u"Li Opu Unicode"])
+        font10.setPointSize(12)
+        self.illness_textEdit.setFont(font10)
         self.illness_textEdit.setTabChangesFocus(True)
 
         self.verticalLayout_2.addWidget(self.illness_textEdit)
@@ -683,7 +694,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.history_label = QLabel(self.groupBox_2)
         self.history_label.setObjectName(u"history_label")
-        self.history_label.setFont(font7)
+        self.history_label.setFont(font9)
 
         self.verticalLayout_3.addWidget(self.history_label)
 
@@ -720,7 +731,7 @@ class Ui_MainWindow(object):
         self.header_label2.setObjectName(u"header_label2")
         self.header_label2.setMinimumSize(QSize(0, 42))
         self.header_label2.setSizeIncrement(QSize(0, 0))
-        self.header_label2.setFont(font6)
+        self.header_label2.setFont(font8)
         self.header_label2.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_7.addWidget(self.header_label2)
@@ -1167,9 +1178,9 @@ class Ui_MainWindow(object):
 
         self.others_label_2 = QLabel(self.groupBox_3)
         self.others_label_2.setObjectName(u"others_label_2")
-        font9 = QFont()
-        font9.setPointSize(14)
-        self.others_label_2.setFont(font9)
+        font11 = QFont()
+        font11.setPointSize(14)
+        self.others_label_2.setFont(font11)
         self.others_label_2.setMargin(0)
         self.others_label_2.setIndent(1)
 
@@ -1205,9 +1216,9 @@ class Ui_MainWindow(object):
 
         self.femaleOnly_label = QLabel(self.groupBox_4)
         self.femaleOnly_label.setObjectName(u"femaleOnly_label")
-        font10 = QFont()
-        font10.setPointSize(15)
-        self.femaleOnly_label.setFont(font10)
+        font12 = QFont()
+        font12.setPointSize(15)
+        self.femaleOnly_label.setFont(font12)
 
         self.horizontalLayout_37.addWidget(self.femaleOnly_label)
 
@@ -1322,7 +1333,7 @@ class Ui_MainWindow(object):
         self.header_label3 = QLabel(self.groupBox_9)
         self.header_label3.setObjectName(u"header_label3")
         self.header_label3.setMinimumSize(QSize(0, 40))
-        self.header_label3.setFont(font6)
+        self.header_label3.setFont(font8)
         self.header_label3.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_26.addWidget(self.header_label3)
@@ -1331,11 +1342,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_101.setObjectName(u"horizontalLayout_101")
         self.will_label = QLabel(self.groupBox_9)
         self.will_label.setObjectName(u"will_label")
-        font11 = QFont()
-        font11.setPointSize(14)
-        font11.setBold(True)
-        font11.setItalic(True)
-        self.will_label.setFont(font11)
+        font13 = QFont()
+        font13.setPointSize(14)
+        font13.setBold(True)
+        font13.setItalic(True)
+        self.will_label.setFont(font13)
 
         self.horizontalLayout_101.addWidget(self.will_label)
 
@@ -1561,7 +1572,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_114.setObjectName(u"horizontalLayout_114")
         self.intellect_label = QLabel(self.groupBox_9)
         self.intellect_label.setObjectName(u"intellect_label")
-        self.intellect_label.setFont(font11)
+        self.intellect_label.setFont(font13)
 
         self.horizontalLayout_114.addWidget(self.intellect_label)
 
@@ -1671,7 +1682,7 @@ class Ui_MainWindow(object):
 
         self.dominating_label = QLabel(self.groupBox_9)
         self.dominating_label.setObjectName(u"dominating_label")
-        self.dominating_label.setFont(font11)
+        self.dominating_label.setFont(font13)
 
         self.verticalLayout_26.addWidget(self.dominating_label)
 
@@ -1712,7 +1723,7 @@ class Ui_MainWindow(object):
 
         self.sentimental_label = QLabel(self.groupBox_9)
         self.sentimental_label.setObjectName(u"sentimental_label")
-        self.sentimental_label.setFont(font11)
+        self.sentimental_label.setFont(font13)
 
         self.verticalLayout_26.addWidget(self.sentimental_label)
 
@@ -1753,7 +1764,7 @@ class Ui_MainWindow(object):
 
         self.sympathetic_label = QLabel(self.groupBox_9)
         self.sympathetic_label.setObjectName(u"sympathetic_label")
-        self.sympathetic_label.setFont(font11)
+        self.sympathetic_label.setFont(font13)
 
         self.verticalLayout_26.addWidget(self.sympathetic_label)
 
@@ -1838,9 +1849,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_29.setObjectName(u"verticalLayout_29")
         self.pastHistory_label = QLabel(self.groupBox_10)
         self.pastHistory_label.setObjectName(u"pastHistory_label")
-        font12 = QFont()
-        font12.setPointSize(16)
-        self.pastHistory_label.setFont(font12)
+        font14 = QFont()
+        font14.setPointSize(16)
+        self.pastHistory_label.setFont(font14)
 
         self.verticalLayout_29.addWidget(self.pastHistory_label)
 
@@ -1860,7 +1871,7 @@ class Ui_MainWindow(object):
         self.familyHistory_label = QLabel(self.groupBox_10)
         self.familyHistory_label.setObjectName(u"familyHistory_label")
         self.familyHistory_label.setMinimumSize(QSize(0, 33))
-        self.familyHistory_label.setFont(font12)
+        self.familyHistory_label.setFont(font14)
         self.familyHistory_label.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
 
         self.verticalLayout_30.addWidget(self.familyHistory_label)
@@ -1905,10 +1916,10 @@ class Ui_MainWindow(object):
         self.others_label = QLabel(self.groupBox_10)
         self.others_label.setObjectName(u"others_label")
         self.others_label.setMinimumSize(QSize(0, 33))
-        font13 = QFont()
-        font13.setPointSize(15)
-        font13.setBold(False)
-        self.others_label.setFont(font13)
+        font15 = QFont()
+        font15.setPointSize(15)
+        font15.setBold(False)
+        self.others_label.setFont(font15)
         self.others_label.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
 
         self.verticalLayout_28.addWidget(self.others_label)
@@ -1935,7 +1946,7 @@ class Ui_MainWindow(object):
 
         self.observation_lineEdit = QLineEdit(self.scrollAreaWidgetContents)
         self.observation_lineEdit.setObjectName(u"observation_lineEdit")
-        self.observation_lineEdit.setFont(font6)
+        self.observation_lineEdit.setFont(font8)
         self.observation_lineEdit.setFocusPolicy(Qt.NoFocus)
         self.observation_lineEdit.setAlignment(Qt.AlignCenter)
         self.observation_lineEdit.setReadOnly(True)
@@ -1953,7 +1964,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.physicalExamination_label = QLabel(self.scrollAreaWidgetContents)
         self.physicalExamination_label.setObjectName(u"physicalExamination_label")
-        self.physicalExamination_label.setFont(font9)
+        self.physicalExamination_label.setFont(font11)
 
         self.verticalLayout_32.addWidget(self.physicalExamination_label)
 
@@ -1967,7 +1978,7 @@ class Ui_MainWindow(object):
 
         self.laboratoryInvestigation_label = QLabel(self.scrollAreaWidgetContents)
         self.laboratoryInvestigation_label.setObjectName(u"laboratoryInvestigation_label")
-        self.laboratoryInvestigation_label.setFont(font9)
+        self.laboratoryInvestigation_label.setFont(font11)
 
         self.verticalLayout_32.addWidget(self.laboratoryInvestigation_label)
 
@@ -1982,11 +1993,11 @@ class Ui_MainWindow(object):
         self.label = QLabel(self.scrollAreaWidgetContents)
         self.label.setObjectName(u"label")
         self.label.setMinimumSize(QSize(90, 50))
-        font14 = QFont()
-        font14.setFamilies([u"Quicksand"])
-        font14.setPointSize(20)
-        font14.setBold(True)
-        self.label.setFont(font14)
+        font16 = QFont()
+        font16.setFamilies([u"Quicksand"])
+        font16.setPointSize(20)
+        font16.setBold(True)
+        self.label.setFont(font16)
         self.label.setFocusPolicy(Qt.NoFocus)
         self.label.setLineWidth(1)
         self.label.setAlignment(Qt.AlignBottom|Qt.AlignHCenter)
@@ -2247,26 +2258,28 @@ class Ui_MainWindow(object):
         self.actionSystem.setText(QCoreApplication.translate("MainWindow", u"System", None))
         self.actionReset_to_Defaults.setText(QCoreApplication.translate("MainWindow", u"Reset to Defaults", None))
         self.groupBox_Header.setTitle("")
-        self.institudeEN_name.setText(QCoreApplication.translate("MainWindow", u"MASNUN HOMEO MEDICARE", None))
-        self.owner_name.setText(QCoreApplication.translate("MainWindow", u"\u09a1\u09be. \u09b6\u09c7\u0996 \u09b0\u09bf\u099c\u0993\u09df\u09be\u09a8\u09c1\u09b0 \u09b0\u09b9\u09ae\u09be\u09a8", None))
-        self.position_label.setText(QCoreApplication.translate("MainWindow", u"\u09b9\u09cb\u09ae\u09bf\u0993\u09aa\u09cd\u09af\u09be\u09a5\u09bf\u0995 \u09ae\u09c7\u09a1\u09bf\u09b8\u09bf\u09a8 \u098f\u09a8\u09cd\u09a1 \u09a8\u09bf\u0989\u099f\u09cd\u09b0\u09bf\u09b6\u09a8 \u0995\u09a8\u09b8\u09be\u09b2\u099f\u09c7\u09a8\u09cd\u099f", None))
-        self.contact_num.setText(QCoreApplication.translate("MainWindow", u"Mobile:  01328-976677", None))
-        self.certificate_info.setText(QCoreApplication.translate("MainWindow", u"\u09b0\u09c7\u099c\u09bf\u0983 \u099a\u09bf\u0995\u09bf\u09ce\u09b8\u0995 \u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u0985\u09a7\u09bf\u09a6\u09aa\u09cd\u09a4\u09b0, \u09a8\u0982- H 1098", None))
         self.instituteBN_name.setText(QCoreApplication.translate("MainWindow", u"\u09ae\u09be\u09b8\u09a8\u09c1\u09a8 \u09b9\u09cb\u09ae\u09bf\u0993 \u09ae\u09c7\u09a1\u09bf\u0995\u09c7\u09df\u09be\u09b0 ", None))
+        self.owner_occupation.setText(QCoreApplication.translate("MainWindow", u"\u09aa\u09cd\u09b0\u09ad\u09be\u09b7\u0995, \u09ac\u09c7\u0997\u09ae \u09ab\u09bf\u09b0\u09cb\u099c\u09be \u0986\u09ae\u09bf\u09b0 \u09b9\u09cb\u09ae\u09bf\u0993\u09aa\u09cd\u09af\u09be\u09a5\u09bf\u0995 \u09ae\u09c7\u09a1\u09bf\u0995\u09c7\u09b2 \u0995\u09b2\u09c7\u099c \u0993 \u09b9\u09be\u09b8\u09aa\u09be\u09a4\u09be\u09b2", None))
+        self.contact_num.setText(QCoreApplication.translate("MainWindow", u"Mobile:  01328-976677", None))
+        self.institudeEN_name.setText(QCoreApplication.translate("MainWindow", u"MASNUN HOMEO MEDICARE", None))
         self.comboBox_location.setItemText(0, QCoreApplication.translate("MainWindow", u"  \u09ac\u09c1\u09b2\u09a8\u09aa\u09c1\u09b0 \u0995\u09dc\u09be\u0987\u09a4\u09b2\u09be \u09ae\u09cb\u09dc, \u09b0\u09be\u099c\u09aa\u09be\u09dc\u09be, \u09b0\u09be\u099c\u09b6\u09be\u09b9\u09c0", None))
         self.comboBox_location.setItemText(1, QCoreApplication.translate("MainWindow", u"  \u09aa\u09c1\u09b2\u09bf\u09b6 \u09ab\u09be\u0981\u09dc\u09bf \u09b0\u09cb\u09a1, \u0995\u09be\u0981\u0995\u09a8 \u09b9\u09be\u099f, \u0997\u09cb\u09a6\u09be\u0997\u09be\u09dc\u09c0, \u09b0\u09be\u099c\u09b6\u09be\u09b9\u09c0", None))
         self.comboBox_location.setItemText(2, QCoreApplication.translate("MainWindow", u"  \u09b8\u09b0\u0995\u09be\u09b0\u09aa\u09be\u09dc\u09be \u09ac\u09be\u099c\u09be\u09b0, \u09a4\u09be\u09a8\u09cb\u09b0, \u0997\u09cb\u09a6\u09be\u0997\u09be\u09dc\u09c0, \u09b0\u09be\u099c\u09b6\u09be\u09b9\u09c0", None))
 
         self.comboBox_location.setCurrentText(QCoreApplication.translate("MainWindow", u"  \u09ac\u09c1\u09b2\u09a8\u09aa\u09c1\u09b0 \u0995\u09dc\u09be\u0987\u09a4\u09b2\u09be \u09ae\u09cb\u09dc, \u09b0\u09be\u099c\u09aa\u09be\u09dc\u09be, \u09b0\u09be\u099c\u09b6\u09be\u09b9\u09c0", None))
-        self.owner_occupation.setText(QCoreApplication.translate("MainWindow", u"\u09aa\u09cd\u09b0\u09ad\u09be\u09b7\u0995, \u09ac\u09c7\u0997\u09ae \u09ab\u09bf\u09b0\u09cb\u099c\u09be \u0986\u09ae\u09bf\u09b0 \u09b9\u09cb\u09ae\u09bf\u0993\u09aa\u09cd\u09af\u09be\u09a5\u09bf\u0995 \u09ae\u09c7\u09a1\u09bf\u0995\u09c7\u09b2 \u0995\u09b2\u09c7\u099c \u0993 \u09b9\u09be\u09b8\u09aa\u09be\u09a4\u09be\u09b2", None))
+        self.certificate_info.setText(QCoreApplication.translate("MainWindow", u"\u09b0\u09c7\u099c\u09bf\u0983 \u099a\u09bf\u0995\u09bf\u09ce\u09b8\u0995 \u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u0985\u09a7\u09bf\u09a6\u09aa\u09cd\u09a4\u09b0, \u09a8\u0982- H 1098", None))
+        self.owner_name.setText(QCoreApplication.translate("MainWindow", u"\u09a1\u09be. \u09b6\u09c7\u0996 \u09b0\u09bf\u099c\u0993\u09df\u09be\u09a8\u09c1\u09b0 \u09b0\u09b9\u09ae\u09be\u09a8", None))
+        self.position_label.setText(QCoreApplication.translate("MainWindow", u"\u09b9\u09cb\u09ae\u09bf\u0993\u09aa\u09cd\u09af\u09be\u09a5\u09bf\u0995 \u09ae\u09c7\u09a1\u09bf\u09b8\u09bf\u09a8 \u098f\u09a8\u09cd\u09a1 \u09a8\u09bf\u0989\u099f\u09cd\u09b0\u09bf\u09b6\u09a8 \u0995\u09a8\u09b8\u09be\u09b2\u099f\u09c7\u09a8\u09cd\u099f", None))
         self.header_label.setText(QCoreApplication.translate("MainWindow", u"GENERAL INFORMATION", None))
         self.id_label.setText(QCoreApplication.translate("MainWindow", u"Patient ID:", None))
         self.name_label.setText(QCoreApplication.translate("MainWindow", u"Patient Name:", None))
+        self.name_lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u" Required", None))
         self.date_label.setText(QCoreApplication.translate("MainWindow", u"Date:", None))
         self.sex_label.setText(QCoreApplication.translate("MainWindow", u"Gender:", None))
         self.male_radiobtn.setText(QCoreApplication.translate("MainWindow", u"Male", None))
         self.female_radiobtn.setText(QCoreApplication.translate("MainWindow", u"Female", None))
         self.age_label.setText(QCoreApplication.translate("MainWindow", u"Age:", None))
+        self.age_lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Required", None))
         self.job_label.setText(QCoreApplication.translate("MainWindow", u"Occupation:", None))
         self.job_comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"Student", None))
         self.job_comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"House wife", None))
@@ -2292,6 +2305,7 @@ class Ui_MainWindow(object):
 
         self.Address_label.setText(QCoreApplication.translate("MainWindow", u"Address:", None))
         self.contact_label.setText(QCoreApplication.translate("MainWindow", u"Contact No:", None))
+        self.contact_lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Required", None))
         self.illness_label.setText(QCoreApplication.translate("MainWindow", u"Patient's Complain (Detailed history of the present illness):", None))
         self.illness_textEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Write Here ...", None))
         self.history_label.setText(QCoreApplication.translate("MainWindow", u"History of past illness (with treatment):", None))

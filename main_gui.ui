@@ -81,7 +81,7 @@
          <x>0</x>
          <y>0</y>
          <width>972</width>
-         <height>5088</height>
+         <height>5111</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -102,53 +102,78 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>150</height>
+            <height>180</height>
            </size>
           </property>
           <property name="title">
            <string/>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
-           <item row="2" column="0">
-            <widget class="QLabel" name="institudeEN_name">
+           <item row="0" column="0">
+            <widget class="QLabel" name="instituteBN_name">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>35</height>
+              </size>
+             </property>
              <property name="font">
               <font>
-               <pointsize>12</pointsize>
+               <family>Noto Sans Bengali UI</family>
+               <pointsize>18</pointsize>
+               <weight>75</weight>
+               <italic>false</italic>
+               <bold>true</bold>
               </font>
              </property>
              <property name="text">
-              <string>MASNUN HOMEO MEDICARE</string>
+              <string>মাসনুন হোমিও মেডিকেয়ার </string>
              </property>
              <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <set>Qt::AlignBottom|Qt::AlignHCenter</set>
              </property>
             </widget>
            </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="owner_name">
+           <item row="4" column="3">
+            <widget class="QLabel" name="owner_occupation">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
+             </property>
              <property name="font">
               <font>
-               <family>Li Opu Unicode</family>
-               <pointsize>15</pointsize>
+               <family>Noto Sans Bengali</family>
+               <pointsize>11</pointsize>
                <weight>50</weight>
+               <italic>false</italic>
                <bold>false</bold>
               </font>
              </property>
-             <property name="text">
-              <string>ডা. শেখ রিজওয়ানুর রহমান</string>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
              </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
-            <widget class="QLabel" name="position_label">
-             <property name="font">
-              <font>
-               <family>Li Mehdi Ekushey Unicode</family>
-               <pointsize>12</pointsize>
-              </font>
+             <property name="lineWidth">
+              <number>2</number>
+             </property>
+             <property name="midLineWidth">
+              <number>2</number>
              </property>
              <property name="text">
-              <string>হোমিওপ্যাথিক মেডিসিন এন্ড নিউট্রিশন কনসালটেন্ট</string>
+              <string>প্রভাষক, বেগম ফিরোজা আমির হোমিওপ্যাথিক মেডিকেল কলেজ ও হাসপাতাল</string>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+             <property name="margin">
+              <number>0</number>
              </property>
             </widget>
            </item>
@@ -162,7 +187,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>12</pointsize>
+               <pointsize>13</pointsize>
               </font>
              </property>
              <property name="text">
@@ -176,89 +201,52 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <spacer name="horizontalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
+           <item row="2" column="0">
+            <widget class="QLabel" name="institudeEN_name">
+             <property name="minimumSize">
               <size>
-               <width>40</width>
-               <height>20</height>
+               <width>0</width>
+               <height>25</height>
               </size>
              </property>
-            </spacer>
-           </item>
-           <item row="3" column="2">
-            <widget class="QLabel" name="certificate_info">
              <property name="font">
               <font>
-               <family>Li Mehdi Ekushey Unicode</family>
-               <pointsize>12</pointsize>
+               <pointsize>13</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>রেজিঃ চিকিৎসক স্বাস্থ্য অধিদপ্তর, নং- H 1098</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="instituteBN_name">
-             <property name="font">
-              <font>
-               <family>Li Shadhinata 2.0 Unicode</family>
-               <pointsize>17</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>মাসনুন হোমিও মেডিকেয়ার </string>
+              <string>MASNUN HOMEO MEDICARE</string>
              </property>
              <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <set>Qt::AlignBottom|Qt::AlignHCenter</set>
              </property>
             </widget>
-           </item>
-           <item row="2" column="1">
-            <spacer name="horizontalSpacer_5">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
            </item>
            <item row="4" column="0">
             <widget class="QComboBox" name="comboBox_location">
              <property name="minimumSize">
               <size>
                <width>0</width>
-               <height>32</height>
+               <height>36</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <family>Li Shadhinata 2.0 Unicode</family>
-               <pointsize>13</pointsize>
+               <family>Noto Sans Bengali</family>
+               <pointsize>12</pointsize>
                <weight>50</weight>
                <italic>false</italic>
                <bold>false</bold>
               </font>
              </property>
              <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
+              <enum>Qt::ClickFocus</enum>
              </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
              <property name="editable">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
              <property name="currentText">
               <string>  বুলনপুর কড়াইতলা মোড়, রাজপাড়া, রাজশাহী</string>
@@ -295,27 +283,46 @@
              </item>
             </widget>
            </item>
-           <item row="4" column="2">
-            <widget class="QLabel" name="owner_occupation">
+           <item row="3" column="3">
+            <widget class="QLabel" name="certificate_info">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="font">
               <font>
-               <family>Li Opu Unicode</family>
-               <pointsize>13</pointsize>
+               <family>Noto Sans Bengali</family>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>রেজিঃ চিকিৎসক স্বাস্থ্য অধিদপ্তর, নং- H 1098</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QLabel" name="owner_name">
+             <property name="font">
+              <font>
+               <family>Noto Sans Bengali</family>
+               <pointsize>16</pointsize>
                <weight>50</weight>
                <italic>false</italic>
                <bold>false</bold>
               </font>
              </property>
              <property name="text">
-              <string>প্রভাষক, বেগম ফিরোজা আমির হোমিওপ্যাথিক মেডিকেল কলেজ ও হাসপাতাল</string>
-             </property>
-             <property name="wordWrap">
-              <bool>true</bool>
+              <string>ডা. শেখ রিজওয়ানুর রহমান</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
-            <spacer name="horizontalSpacer_7">
+           <item row="2" column="1">
+            <spacer name="horizontalSpacer_5">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
@@ -327,8 +334,8 @@
              </property>
             </spacer>
            </item>
-           <item row="4" column="1">
-            <spacer name="horizontalSpacer_6">
+           <item row="0" column="1">
+            <spacer name="horizontalSpacer_4">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
@@ -339,6 +346,22 @@
               </size>
              </property>
             </spacer>
+           </item>
+           <item row="2" column="3">
+            <widget class="QLabel" name="position_label">
+             <property name="font">
+              <font>
+               <family>Noto Sans Bengali</family>
+               <pointsize>13</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>হোমিওপ্যাথিক মেডিসিন এন্ড নিউট্রিশন কনসালটেন্ট</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -518,6 +541,12 @@
                         <font>
                          <pointsize>12</pointsize>
                         </font>
+                       </property>
+                       <property name="placeholderText">
+                        <string> Required</string>
+                       </property>
+                       <property name="clearButtonEnabled">
+                        <bool>false</bool>
                        </property>
                       </widget>
                      </item>
@@ -730,6 +759,9 @@
                         <font>
                          <pointsize>12</pointsize>
                         </font>
+                       </property>
+                       <property name="placeholderText">
+                        <string>Required</string>
                        </property>
                       </widget>
                      </item>
@@ -1066,6 +1098,9 @@
                         <font>
                          <pointsize>12</pointsize>
                         </font>
+                       </property>
+                       <property name="placeholderText">
+                        <string>Required</string>
                        </property>
                       </widget>
                      </item>
